@@ -33,3 +33,7 @@ pnpm cf-typegen
 ```
 
 For a Coming Soon deployment through Cloudflare Workers Builds, add `RELEASE=unpublished` as a build variable. Leave it unset for the productive website.
+
+### Deployment troubleshooting
+
+If Workers Builds completes the application build but Wrangler receives a temporary `503 Service Unavailable` while validating the Worker, retry the failed build from the Cloudflare dashboard. The Worker name in Cloudflare must match `hetzpilot-website`, as configured in `wrangler.jsonc`.
