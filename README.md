@@ -1,21 +1,35 @@
-# Next.js template
+# HetzPilot website
 
-This is a Next.js template with shadcn/ui.
+Product and support website for the HetzPilot iOS app, deployed as a Next.js Worker with OpenNext on Cloudflare.
 
-## Adding components
-
-To add components to your app, run the following command:
+## Local development
 
 ```bash
-npx shadcn@latest add button
+pnpm install
+pnpm dev
 ```
 
-This will place the ui components in the `components` directory.
+The release state is controlled at build time:
 
-## Using components
+- `RELEASE=unpublished` renders the Coming Soon state and disables App Store links.
+- If `RELEASE` is unset (or has any other value), the website renders the published state.
 
-To use the components in your app, import them as follows:
-
-```tsx
-import { Button } from "@/components/ui/button";
+```bash
+RELEASE=unpublished pnpm build
+pnpm build
 ```
+
+Set `NEXT_PUBLIC_APP_STORE_URL` to override the App Store destination.
+
+## Cloudflare
+
+The Worker and its custom domain `hetzpilot.benouarets.dev` are configured in `wrangler.jsonc`.
+
+```bash
+pnpm preview
+pnpm deploy
+pnpm upload
+pnpm cf-typegen
+```
+
+For a Coming Soon deployment through Cloudflare Workers Builds, add `RELEASE=unpublished` as a build variable. Leave it unset for the productive website.
