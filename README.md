@@ -12,10 +12,12 @@ pnpm dev
 The release state is controlled at build time:
 
 - `RELEASE=unpublished` renders the Coming Soon state and disables App Store links.
+- `RELEASE=inapplereview` shows that Apple is reviewing the app and keeps App Store links disabled.
 - If `RELEASE` is unset (or has any other value), the website renders the published state.
 
 ```bash
 RELEASE=unpublished pnpm build
+RELEASE=inapplereview pnpm build
 pnpm build
 ```
 
@@ -32,7 +34,7 @@ pnpm upload
 pnpm cf-typegen
 ```
 
-For a Coming Soon deployment through Cloudflare Workers Builds, add `RELEASE=unpublished` as a build variable. Leave it unset for the productive website.
+For a Coming Soon deployment through Cloudflare Workers Builds, add `RELEASE=unpublished` as a build variable. Use `RELEASE=inapplereview` while Apple is reviewing the app. Leave the variable unset for the productive website.
 
 ### Deployment troubleshooting
 

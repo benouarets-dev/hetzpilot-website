@@ -5,11 +5,27 @@ import { Brand } from "@/components/brand"
 import { AppleDark } from "@/components/ui/svgs/appleDark"
 import { GithubDark } from "@/components/ui/svgs/githubDark"
 import { InstagramIcon } from "@/components/ui/svgs/instagramIcon"
-import { APP_STORE_URL, IS_UNPUBLISHED, SITE_BASE_PATH } from "@/lib/site"
+import { APP_STORE_URL, IS_APP_AVAILABLE, IS_IN_APP_REVIEW, SITE_BASE_PATH } from "@/lib/site"
 
 export function SiteHeader() {
+  const pendingLabel = IS_IN_APP_REVIEW ? "In App Review" : "Coming soon"
+
   return (
     <header className="site-header">
+      {IS_IN_APP_REVIEW ? (
+        <div className="release-banner release-banner--review" role="status">
+          <span className="release-banner__dot" aria-hidden="true" />
+          <strong>Apple is reviewing HetzPilot.</strong>
+          <span>It won’t be long now.</span>
+        </div>
+      ) : IS_APP_AVAILABLE ? (
+        <a className="release-banner release-banner--available" href={APP_STORE_URL} target="_blank" rel="noreferrer" data-conversion="app-store-download" data-placement="release-banner">
+          <span className="release-banner__dot" aria-hidden="true" />
+          <strong>HetzPilot is now available.</strong>
+          <span>Download it on the App Store.</span>
+          <ArrowUpRight aria-hidden="true" />
+        </a>
+      ) : null}
       <div className="site-header__inner">
         <Brand />
         <nav className="site-nav" aria-label="Primary navigation">
@@ -18,9 +34,9 @@ export function SiteHeader() {
           <a href="https://benouarets.dev" target="_blank" rel="noreferrer">
             Developer <ArrowUpRight aria-hidden="true" />
           </a>
-          {IS_UNPUBLISHED ? (
+          {!IS_APP_AVAILABLE ? (
             <span className="nav-download nav-download--static">
-              <AppleDark className="apple-mark" aria-hidden="true" /> Coming soon
+              <AppleDark className="apple-mark" aria-hidden="true" /> {pendingLabel}
             </span>
           ) : (
             <a className="nav-download" href={APP_STORE_URL} target="_blank" rel="noreferrer" data-conversion="app-store-download" data-placement="header">
@@ -34,16 +50,18 @@ export function SiteHeader() {
 }
 
 export function SiteFooter() {
+  const pendingLabel = IS_IN_APP_REVIEW ? "In App Review" : "Coming soon"
+
   return (
     <footer className="site-footer">
       <div className="site-footer__inner">
         <div className="site-footer__brand">
           <Brand />
           <p>A native iOS control center for your Hetzner Cloud infrastructure.</p>
-          {IS_UNPUBLISHED ? (
+          {!IS_APP_AVAILABLE ? (
             <div className="footer-store-button footer-store-button--static">
               <AppleDark className="apple-mark" aria-hidden="true" />
-              <span><small>App Store release</small>Coming soon</span>
+              <span><small>App Store release</small>{pendingLabel}</span>
             </div>
           ) : (
             <a className="footer-store-button" href={APP_STORE_URL} target="_blank" rel="noreferrer" data-conversion="app-store-download" data-placement="footer">
@@ -56,7 +74,7 @@ export function SiteFooter() {
           <strong>Product</strong>
           <nav aria-label="Product">
             <Link href={`${SITE_BASE_PATH}#capabilities`}>Capabilities</Link>
-            {IS_UNPUBLISHED ? <span className="footer-coming-soon">Coming soon</span> : <a href={APP_STORE_URL} target="_blank" rel="noreferrer" data-conversion="app-store-download" data-placement="footer-navigation">App Store</a>}
+            {!IS_APP_AVAILABLE ? <span className="footer-coming-soon">{pendingLabel}</span> : <a href={APP_STORE_URL} target="_blank" rel="noreferrer" data-conversion="app-store-download" data-placement="footer-navigation">App Store</a>}
             <Link href={`${SITE_BASE_PATH}/support`}>Support</Link>
           </nav>
         </div>

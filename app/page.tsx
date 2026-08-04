@@ -20,7 +20,7 @@ import { AppIcon } from "@/components/brand"
 import { SiteFooter, SiteHeader } from "@/components/site-shell"
 import { StructuredData } from "@/components/structured-data"
 import { AppleDark } from "@/components/ui/svgs/appleDark"
-import { APP_STORE_URL, IS_UNPUBLISHED, SITE_BASE_PATH, SITE_URL } from "@/lib/site"
+import { APP_STORE_URL, IS_APP_AVAILABLE, IS_IN_APP_REVIEW, SITE_BASE_PATH, SITE_URL } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: { absolute: "Hetzner Cloud iOS App for iPhone | HetzPilot" },
@@ -127,6 +127,36 @@ const faqs = [
   },
 ]
 
+const releaseCopy = IS_IN_APP_REVIEW
+  ? {
+      eyebrow: "Now in App Review",
+      action: "In App Review",
+      status: "In App Review",
+      statusDetail: "Apple is reviewing the release",
+      sectionLabel: "Almost there",
+      description: "Apple is reviewing HetzPilot. The App Store release is close.",
+      dotClass: "review-dot",
+    }
+  : IS_APP_AVAILABLE
+    ? {
+        eyebrow: "Available now on the App Store",
+        action: "Download on the App Store",
+        status: "Available now",
+        statusDetail: "Download for iPhone",
+        sectionLabel: "Available now",
+        description: "HetzPilot is available now on the App Store for iPhone.",
+        dotClass: "live-dot",
+      }
+    : {
+        eyebrow: "Coming soon to the App Store",
+        action: "Coming soon",
+        status: "Coming soon",
+        statusDetail: "App Store release in preparation",
+        sectionLabel: "Coming soon",
+        description: "HetzPilot is coming soon to the App Store for iPhone.",
+        dotClass: "pending-dot",
+      }
+
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -139,7 +169,7 @@ const structuredData = {
       applicationCategory: "DeveloperApplication",
       operatingSystem: "iOS",
       url: SITE_URL,
-      ...(!IS_UNPUBLISHED && { downloadUrl: APP_STORE_URL }),
+      ...(IS_APP_AVAILABLE && { downloadUrl: APP_STORE_URL }),
       image: `${SITE_URL}/ios-logo.png`,
       screenshot: [
         `${SITE_URL}/mockup-overview.png`,
@@ -158,8 +188,8 @@ const structuredData = {
         "@type": "Offer",
         price: "0",
         priceCurrency: "EUR",
-        availability: IS_UNPUBLISHED ? "https://schema.org/PreOrder" : "https://schema.org/InStock",
-        url: IS_UNPUBLISHED ? SITE_URL : APP_STORE_URL,
+        availability: IS_APP_AVAILABLE ? "https://schema.org/InStock" : "https://schema.org/PreOrder",
+        url: IS_APP_AVAILABLE ? APP_STORE_URL : SITE_URL,
       },
       author: {
         "@type": "Person",
@@ -220,15 +250,15 @@ export default function Page() {
       <main>
         <section className="hero">
           <div className="hero__content">
-            <div className="eyebrow"><span /> {IS_UNPUBLISHED ? "Coming soon to the App Store" : "Available now on the App Store"}</div>
+            <div className="eyebrow"><span /> {releaseCopy.eyebrow}</div>
             <h1>Hetzner Cloud.<br /><em>Within reach.</em></h1>
             <p className="hero__lede">
               HetzPilot is a native Hetzner Cloud iOS app for iPhone—built to monitor servers, manage infrastructure, and act securely without opening a laptop.
             </p>
             <div className="hero__actions">
-              {IS_UNPUBLISHED ? (
+              {!IS_APP_AVAILABLE ? (
                 <span className="primary-button primary-button--static">
-                  <AppleDark className="apple-mark" aria-hidden="true" /> Coming soon
+                  <AppleDark className="apple-mark" aria-hidden="true" /> {releaseCopy.action}
                 </span>
               ) : (
                 <a className="primary-button" href={APP_STORE_URL} target="_blank" rel="noreferrer" data-conversion="app-store-download" data-placement="hero">
@@ -255,8 +285,8 @@ export default function Page() {
           </div>
           <div className="signal-strip__facts">
             <div>
-              <span className="signal-strip__icon"><span className={IS_UNPUBLISHED ? "pending-dot" : "live-dot"} /></span>
-              <span><strong>{IS_UNPUBLISHED ? "Coming soon" : "Available now"}</strong><small>{IS_UNPUBLISHED ? "App Store release in preparation" : "Download for iPhone"}</small></span>
+              <span className="signal-strip__icon"><span className={releaseCopy.dotClass} /></span>
+              <span><strong>{releaseCopy.status}</strong><small>{releaseCopy.statusDetail}</small></span>
             </div>
             <div>
               <span className="signal-strip__icon"><Zap /></span>
@@ -431,13 +461,13 @@ export default function Page() {
           <div className="availability__mark" aria-hidden="true">
             <Image src="/pilot-logo.png" alt="" width={78} height={78} sizes="78px" />
           </div>
-          <span className="section-label">{IS_UNPUBLISHED ? "Coming soon" : "Available now"}</span>
+          <span className="section-label">{releaseCopy.sectionLabel}</span>
           <h2>Cloud operations<br />without the noise.</h2>
-          <p>{IS_UNPUBLISHED ? "HetzPilot is coming soon to the App Store for iPhone." : "HetzPilot is available now on the App Store for iPhone."}</p>
+          <p>{releaseCopy.description}</p>
           <div className="availability__actions">
-            {IS_UNPUBLISHED ? (
+            {!IS_APP_AVAILABLE ? (
               <span className="primary-button primary-button--static">
-                <AppleDark className="apple-mark" aria-hidden="true" /> Coming soon
+                <AppleDark className="apple-mark" aria-hidden="true" /> {releaseCopy.action}
               </span>
             ) : (
               <a className="primary-button" href={APP_STORE_URL} target="_blank" rel="noreferrer" data-conversion="app-store-download" data-placement="final-cta">

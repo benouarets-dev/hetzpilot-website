@@ -60,6 +60,29 @@ svg { flex: 0 0 auto; }
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
 }
 
+.release-banner {
+  min-height: 34px;
+  padding: 7px var(--page-gutter);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: #f7f8fa;
+  font-size: 12px;
+  line-height: 1.35;
+  letter-spacing: -.005em;
+  text-align: center;
+}
+.release-banner strong { font-weight: 680; }
+.release-banner > span:not(.release-banner__dot) { color: rgba(247,248,250,.7); }
+.release-banner > svg { width: 13px; height: 13px; margin-left: 2px; }
+.release-banner--review { background: #24211b; }
+.release-banner--available { background: #11271e; transition: background-color 160ms ease; }
+.release-banner--available:hover { background: #173326; color: #fff; }
+.release-banner__dot { width: 6px; height: 6px; flex: 0 0 auto; border-radius: 50%; }
+.release-banner--review .release-banner__dot { background: #f0a43a; box-shadow: 0 0 0 4px rgba(240,164,58,.12); }
+.release-banner--available .release-banner__dot { background: #42c889; box-shadow: 0 0 0 4px rgba(66,200,137,.12); }
+
 .site-header__inner,
 .site-footer__inner,
 .site-footer__fineprint {
@@ -231,6 +254,7 @@ svg { flex: 0 0 auto; }
 .signal-strip__icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 11px; background: rgba(255,255,255,.07); color: #d7dae0; }
 .signal-strip__icon > svg { width: 16px; height: 16px; }
 .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(22,133,86,.1); }
+.review-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px rgba(38,121,255,.12); }
 .pending-dot { width: 7px; height: 7px; border-radius: 50%; background: #f0a43a; box-shadow: 0 0 0 4px rgba(240,164,58,.12); }
 
 .section { width: min(var(--site-max), calc(100% - (var(--page-gutter) * 2))); margin-inline: auto; padding-block: 132px; }
@@ -553,6 +577,8 @@ svg { flex: 0 0 auto; }
 
 @media (max-width: 460px) {
   :root { --page-gutter: 18px; --panel-pad: 22px; --legal-pad: 22px; }
+  .release-banner { min-height: 38px; padding-block: 6px; flex-wrap: wrap; gap: 2px 6px; font-size: 11px; }
+  .release-banner > svg { display: none; }
   .brand { font-size: 16px; }
   .site-nav .nav-download { min-height: 38px; padding-inline: 11px; }
   .hero__content { padding-top: 58px; }
