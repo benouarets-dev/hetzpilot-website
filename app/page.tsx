@@ -74,7 +74,7 @@ const resourceGroups = [
 
 const appScreens = [
   {
-    src: "/mockup-resources.png",
+    src: "/mockup-resources.webp",
     width: 1317,
     height: 2716,
     mockup: true,
@@ -82,7 +82,7 @@ const appScreens = [
     caption: "Move through compute, network, storage, DNS, and security from one native hierarchy.",
   },
   {
-    src: "/mockup-servers.png",
+    src: "/mockup-servers.webp",
     width: 1317,
     height: 2716,
     mockup: true,
@@ -90,7 +90,7 @@ const appScreens = [
     caption: "See which machines are running and open the one that needs your attention.",
   },
   {
-    src: "/mockup-create-server.png",
+    src: "/mockup-create-server.webp",
     width: 1317,
     height: 2716,
     mockup: true,
@@ -170,12 +170,12 @@ const structuredData = {
       operatingSystem: "iOS",
       url: SITE_URL,
       ...(IS_APP_AVAILABLE && { downloadUrl: APP_STORE_URL }),
-      image: `${SITE_URL}/ios-logo.png`,
+      image: `${SITE_URL}/ios-logo.webp`,
       screenshot: [
-        `${SITE_URL}/mockup-overview.png`,
-        `${SITE_URL}/mockup-resources.png`,
-        `${SITE_URL}/mockup-servers.png`,
-        `${SITE_URL}/mockup-create-server.png`,
+        `${SITE_URL}/mockup-overview.webp`,
+        `${SITE_URL}/mockup-resources.webp`,
+        `${SITE_URL}/mockup-servers.webp`,
+        `${SITE_URL}/mockup-create-server.webp`,
       ],
       featureList: [
         "Hetzner Cloud server monitoring and management",
@@ -230,7 +230,7 @@ function DashboardPreview() {
       <div className="orbit orbit--two" />
       <div className="hero-product-mockup">
         <Image
-          src="/mockup-overview.png"
+          src="/mockup-overview.webp"
           alt="HetzPilot iPhone overview showing healthy Hetzner Cloud infrastructure"
           width={1935}
           height={5436}
@@ -459,7 +459,7 @@ export default function Page() {
 
         <section className="availability" id="availability">
           <div className="availability__mark" aria-hidden="true">
-            <Image src="/pilot-logo.png" alt="" width={78} height={78} sizes="78px" />
+            <Image src="/pilot-logo.webp" alt="" width={78} height={78} sizes="78px" />
           </div>
           <span className="section-label">{releaseCopy.sectionLabel}</span>
           <h2>Cloud operations<br />without the noise.</h2>

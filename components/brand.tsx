@@ -10,7 +10,7 @@ export function AppIcon({ compact = false }: { compact?: boolean }) {
     <span className={compact ? "app-icon app-icon--compact" : "app-icon"} aria-hidden="true">
       <Image
         className="app-icon__image"
-        src="/ios-logo.png"
+        src="/ios-logo.webp"
         alt=""
         width={size}
         height={size}

@@ -19,8 +19,8 @@ export const metadata: Metadata = {
   creator: "Björn Benouarets",
   publisher: "Björn Benouarets",
   icons: {
-    icon: "/ios-logo.png",
-    apple: "/ios-logo.png",
+    icon: "/ios-logo.webp",
+    apple: "/ios-logo.webp",
   },
   alternates: { canonical: "/" },
   openGraph: {
