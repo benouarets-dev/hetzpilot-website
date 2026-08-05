@@ -15,3 +15,6 @@ export const IS_APP_AVAILABLE = RELEASE_STATUS === "published"
 export const APP_STORE_URL =
   process.env.NEXT_PUBLIC_APP_STORE_URL ??
   "https://apps.apple.com/de/search?term=HetzPilot"
+
+export const APPLE_STANDARD_EULA_URL =
+  "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"

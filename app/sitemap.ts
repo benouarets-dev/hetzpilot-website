@@ -19,7 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     { url: `${SITE_URL}/support`, lastModified: LAST_SIGNIFICANT_UPDATE },
     { url: `${SITE_URL}/privacy`, lastModified: LAST_SIGNIFICANT_UPDATE },
-    { url: `${SITE_URL}/agb`, lastModified: LAST_SIGNIFICANT_UPDATE },
     { url: `${SITE_URL}/impressum`, lastModified: LAST_SIGNIFICANT_UPDATE },
   ]
 }

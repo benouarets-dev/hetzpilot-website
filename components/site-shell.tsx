@@ -5,7 +5,7 @@ import { Brand } from "@/components/brand"
 import { AppleDark } from "@/components/ui/svgs/appleDark"
 import { GithubDark } from "@/components/ui/svgs/githubDark"
 import { InstagramIcon } from "@/components/ui/svgs/instagramIcon"
-import { APP_STORE_URL, IS_APP_AVAILABLE, IS_IN_APP_REVIEW, SITE_BASE_PATH } from "@/lib/site"
+import { APP_STORE_URL, APPLE_STANDARD_EULA_URL, IS_APP_AVAILABLE, IS_IN_APP_REVIEW, SITE_BASE_PATH } from "@/lib/site"
 
 export function SiteHeader() {
   const pendingLabel = IS_IN_APP_REVIEW ? "In App Review" : "Coming soon"
@@ -83,7 +83,7 @@ export function SiteFooter() {
           <nav aria-label="Legal">
             <Link href={`${SITE_BASE_PATH}/impressum`}>Imprint</Link>
             <Link href={`${SITE_BASE_PATH}/privacy`}>Privacy</Link>
-            <Link href={`${SITE_BASE_PATH}/agb`}>Terms</Link>
+            <a href={APPLE_STANDARD_EULA_URL} target="_blank" rel="noreferrer">Terms</a>
             <a href="mailto:info@benouarets.dev">Contact</a>
           </nav>
         </div>
