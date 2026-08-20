@@ -641,7 +641,7 @@ svg { flex: 0 0 auto; }
 .newsletter-section {
   width: min(var(--site-max), calc(100% - (var(--page-gutter) * 2)));
   margin-inline: auto;
-  margin-top: 24px;
+  margin-block: 68px;
 }
 
 .newsletter-card {
@@ -783,6 +783,9 @@ svg { flex: 0 0 auto; }
 }
 
 @media (max-width: 680px) {
+  .newsletter-section {
+    margin-block: 36px;
+  }
   .newsletter-input-group {
     flex-direction: column;
     align-items: stretch;
