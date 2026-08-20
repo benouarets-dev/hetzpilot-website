@@ -64,7 +64,7 @@ export default function NewsletterConfirmedPage() {
               </a>
             ) : null}
 
-            <Link className="secondary-button" style={{ background: "var(--ink)", color: "#fff" }} href="/">
+            <Link className="secondary-button" href="/">
               Back to HetzPilot <ArrowRight style={{ width: "16px", height: "16px" }} />
             </Link>
           </div>
