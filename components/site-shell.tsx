@@ -74,6 +74,7 @@ export function SiteFooter() {
           <strong>Product</strong>
           <nav aria-label="Product">
             <Link href={`${SITE_BASE_PATH}#capabilities`}>Capabilities</Link>
+            <Link href={`${SITE_BASE_PATH}#newsletter`}>Newsletter</Link>
             {!IS_APP_AVAILABLE ? <span className="footer-coming-soon">{pendingLabel}</span> : <a href={APP_STORE_URL} target="_blank" rel="noreferrer" data-conversion="app-store-download" data-placement="footer-navigation">App Store</a>}
             <Link href={`${SITE_BASE_PATH}/support`}>Support</Link>
           </nav>

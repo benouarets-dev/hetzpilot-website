@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
       { source: "/hetzpilot/agb", destination: APPLE_STANDARD_EULA_URL, permanent: true },
       { source: "/hetzpilot/terms", destination: APPLE_STANDARD_EULA_URL, permanent: true },
       { source: "/hetzpilot/impressum", destination: "/impressum", permanent: true },
+      { source: "/newsletter/bestaetigt", destination: "/newsletter/confirmed", permanent: true },
+      { source: "/newsletter/confirm", destination: "/newsletter/confirmed", permanent: true },
     ]
   },
 }

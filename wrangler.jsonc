@@ -15,6 +15,10 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  "vars": {
+    "BREVO_LIST_ID": "9",
+    "BREVO_DOI_TEMPLATE_ID": "8"
+  },
   "observability": {
     "enabled": true
   }

@@ -17,6 +17,7 @@ import {
 } from "lucide-react"
 
 import { AppIcon } from "@/components/brand"
+import { NewsletterForm } from "@/components/newsletter-form"
 import { SiteFooter, SiteHeader } from "@/components/site-shell"
 import { StructuredData } from "@/components/structured-data"
 import { AppleDark } from "@/components/ui/svgs/appleDark"
@@ -455,6 +456,10 @@ export default function Page() {
               </details>
             ))}
           </div>
+        </section>
+
+        <section className="newsletter-section" id="newsletter" aria-label="Newsletter">
+          <NewsletterForm />
         </section>
 
         <section className="availability" id="availability">
