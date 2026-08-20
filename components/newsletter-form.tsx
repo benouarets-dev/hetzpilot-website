@@ -52,19 +52,13 @@ export function NewsletterForm() {
             <button
               type="submit"
               disabled={isPending}
-              className="primary-button newsletter-submit"
+              className="newsletter-icon-button"
               aria-label="Subscribe to newsletter"
             >
               {isPending ? (
-                <>
-                  <Loader2 className="animate-spin" aria-hidden="true" />
-                  <span>Subscribing...</span>
-                </>
+                <Loader2 className="animate-spin" aria-hidden="true" />
               ) : (
-                <>
-                  <span>Subscribe</span>
-                  <Send className="newsletter-send-icon" aria-hidden="true" />
-                </>
+                <Send className="newsletter-send-icon" aria-hidden="true" />
               )}
             </button>
           </div>
