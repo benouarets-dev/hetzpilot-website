@@ -14,13 +14,32 @@ async function getEnvVar(key: string): Promise<string | undefined> {
   try {
     const { getCloudflareContext } = await import("@opennextjs/cloudflare")
     const cf = await getCloudflareContext({ async: true })
-    if (cf?.env && typeof (cf.env as Record<string, unknown>)[key] === "string") {
-      return (cf.env as Record<string, string>)[key]
+    if (cf?.env) {
+      const binding = (cf.env as Record<string, unknown>)[key]
+      if (typeof binding === "string" && binding.length > 0) {
+        return binding
+      }
+      if (
+        binding &&
+        typeof binding === "object" &&
+        "get" in binding &&
+        typeof (binding as { get: () => Promise<string> }).get === "function"
+      ) {
+        const val = await (binding as { get: () => Promise<string> }).get()
+        if (typeof val === "string" && val.length > 0) {
+          return val
+        }
+      }
     }
-  } catch {
-    // Ignore and fallback to process.env
+  } catch (err) {
+    console.error("Error reading Cloudflare context:", err)
   }
-  return process.env[key]
+
+  if (typeof process.env[key] === "string" && process.env[key].length > 0) {
+    return process.env[key]
+  }
+
+  return undefined
 }
 
 export async function subscribeNewsletter(
@@ -52,7 +71,16 @@ export async function subscribeNewsletter(
   const redirectionUrl = `${siteUrl.replace(/\/$/, "")}/newsletter/confirmed`
 
   if (!apiKey) {
-    console.error("BREVO_API_KEY is not set.")
+    try {
+      const { getCloudflareContext } = await import("@opennextjs/cloudflare")
+      const cf = await getCloudflareContext({ async: true })
+      console.error(
+        "BREVO_API_KEY is not set. Available cf.env keys:",
+        cf?.env ? Object.keys(cf.env) : "no cf.env"
+      )
+    } catch {
+      console.error("BREVO_API_KEY is not set.")
+    }
     // In local dev without key, return mock success message to test UI
     if (process.env.NODE_ENV === "development") {
       return {
