@@ -16,6 +16,7 @@
     "binding": "ASSETS"
   },
   "vars": {
+    "RELEASE": "inapplereview",
     "BREVO_LIST_ID": "9",
     "BREVO_DOI_TEMPLATE_ID": "8"
   },
