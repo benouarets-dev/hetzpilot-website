@@ -53,14 +53,14 @@ export async function subscribeNewsletter(
   if (honeypot) {
     return {
       success: true,
-      message: "Fast geschafft! Bitte überprüfe dein Postfach, um deine Anmeldung zu bestätigen.",
+      message: "Almost done! Please check your inbox to confirm your newsletter subscription.",
     }
   }
 
   if (!email || !EMAIL_REGEX.test(email)) {
     return {
       success: false,
-      error: "Bitte gib eine gültige E-Mail-Adresse ein.",
+      error: "Please enter a valid email address.",
     }
   }
 
@@ -86,12 +86,12 @@ export async function subscribeNewsletter(
       return {
         success: true,
         message:
-          "[DEV MODUS: Kein API-Key hinterlegt] Fast geschafft! Bitte überprüfe dein Postfach, um deine Anmeldung zu bestätigen.",
+          "[DEV MODE: No API key set] Almost done! Please check your inbox to confirm your newsletter subscription.",
       }
     }
     return {
       success: false,
-      error: "Newsletter-Dienst ist derzeit nicht konfiguriert. Bitte versuche es später noch einmal.",
+      error: "Newsletter service is currently not configured. Please try again later.",
     }
   }
 
@@ -114,7 +114,7 @@ export async function subscribeNewsletter(
     if (response.status === 201 || response.status === 204 || response.status === 200) {
       return {
         success: true,
-        message: "Fast geschafft! Wir haben dir eine E-Mail mit einem Bestätigungslink gesendet.",
+        message: "Almost done! We’ve sent a confirmation email to your inbox. Please click the link inside to confirm your newsletter subscription.",
       }
     }
 
@@ -127,19 +127,19 @@ export async function subscribeNewsletter(
     if (data?.code === "duplicate_parameter" || data?.message?.includes("already exist")) {
       return {
         success: true,
-        message: "Du bist bereits eingetragen oder die Bestätigungs-E-Mail wurde bereits versendet.",
+        message: "You are already subscribed or a confirmation email has already been sent.",
       }
     }
 
     return {
       success: false,
-      error: data?.message || "Bei der Anmeldung ist ein Fehler aufgetreten. Bitte versuche es später erneut.",
+      error: data?.message || "An error occurred while processing your subscription. Please try again later.",
     }
   } catch (error) {
     console.error("Failed to subscribe via Brevo:", error)
     return {
       success: false,
-      error: "Verbindungsfehler. Bitte überprüfe deine Internetverbindung und versuche es erneut.",
+      error: "Connection error. Please check your network connection and try again.",
     }
   }
 }
